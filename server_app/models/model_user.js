@@ -43,12 +43,7 @@ exports.remove_home = function(db,params,cb){
 	});
 };
 
-exports.add_home = function(db,params,cb){
-	db.collection('users').update({'user_id':params.user_id},{$push:{'homes':params.home_id}},function(err,user_doc){
-		if(err) cb(err,null);
-		else cb(null,user_doc);
-	});
-};
+
 
 exports.register = function (db,params,cb){
 	console.log('Inside model_user.register');
@@ -100,9 +95,10 @@ exports.user_gps_delay = function (db,params, cb){
 };
 
 //params = {user_id, location, home_id}
-exports.add_home_to_user = function (db, params, cb){
-	db.collection('homes').insert({'home_id': params.home_id, "location": params.location}, function(err, home){
-			db.collection('users').update({'user_id':params.user_id}, {'house_id': home[0].house_id}, function(err, count){
+//binds a home to a user
+exports.set_home = function (db, params, cb){
+	db.collection('homes').insert({'home_id': params.home_id, "location": params.location, 'home_type': params.home_type}, function(err, home){
+			db.collection('users').update({'user_id':params.user_id}, {$set: {'house_id': home[0].house_id}}, function(err, count){
 				if(err){
 					cb(err, null);
 				}else{
@@ -111,20 +107,8 @@ exports.add_home_to_user = function (db, params, cb){
 			});
 		});
 };
-exports.set_home_location = function (db, params, cb){
-	db.collection('users').findOne({'user_id':params.user_id}, function(err, user){
-		if(err){
-			cb(err, null);
-		}else{
-		db.collection('homes').findAndModify({'home_id': user.home_id},{},{"location": params.location},{'new':true},  function(err, home){
-			if(err){
-				cb(err, null);
-			}else{
-				cb(null, 200);
-			}
-		});
-	}
-};
+
+
 exports.check_user_at_home = function(db, params, cb){
 
 	db.collection('users').findOne({'user_id':params.user_id}, function(err, user){
@@ -140,5 +124,8 @@ exports.check_user_at_home = function(db, params, cb){
 		});
 	});
 }
+
+// params = {user_id, eta}
+
 
 }

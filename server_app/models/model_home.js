@@ -47,3 +47,24 @@ exports.get_info = function(db,params, cb){
 	});
 	
 };
+exports.turn_on_heating = function (db, params, cb){
+	db.collection('users').findOne({'user_id': params.item_id}, function(err, user){
+		if(err){
+			cb(error, null);
+		}else{
+			db.collection('homes').findOne({'house_id': user.house_id}, function(err, house){
+				if(err){
+					cb(err, null);
+				}else{
+					db.collection('home').update({'house_id': house.house_id},{$set {'heating_status': true}} function(err, count){
+						if(err){
+							cb(err, null);
+						}else{
+							cb(null, 200);
+						}
+					});
+				}
+			});
+		}
+	});
+}

@@ -175,6 +175,22 @@ module.exports = function(db,app){
 		console.log('--- GET /home/location ...');
 		//Home.get_location;
 	});
+	/*----------------------------------------------*/
+	/*-Check if the phone is approaching the house-*/
+	/*--------------------------------------------*/
+	app.post('/user/approaching', function(req, res){
+		var params = {
+			'user_id': req.body.user_id,
+			'location': req.body.location
+		};
+		User.approaching(params, function(err, response){
+			if(err){
+				res.send(err);
+			}else{
+				res.send(response);
+			}
+		})
+	});
 	
 	  /*-----------------*/
 	 /*-Turn on heating-*/
