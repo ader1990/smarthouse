@@ -16,30 +16,37 @@ module.exports = function(db,app){
 		});
 	});
 	
-	  /*-----------------*/
-	 /*-Get device info-*/
-	/*-----------------*/
-	app.get('/device/info', function(req,res){
-		//Device.get_info(params);
+      /*----------------*/
+	 /*-Get user homes-*/
+	/*----------------*/
+	app.get('/user/homes', function(req,res){
+		
 	});
 	
-	  /*-----------------*/
-	 /*-Register device-*/
-	/*-----------------*/
-	app.post('/device/register', function(req,res){
+	  /*---------------*/
+	 /*-Get user info-*/
+	/*---------------*/
+	app.get('/user/info', function(req,res){
+		//User.get_info(params);
+	});
+
+	  /*-------------*/
+	 /*-Log-in user-*/
+	/*-------------*/
+	app.post('/user/login',function(req,res){
+		//User.login(params);
+	});
+	
+	  /*---------------*/
+	 /*-Register user-*/
+	/*---------------*/
+	app.post('/user/register', function(req,res){
 	    var params = {
 			home_id:req.body.home_id,
 			home_pass:req.body.home_pass,
 			phone_nr:req.bodt.home_nr
 		}
 		//Device.register(params);
-	});
-	
-	  /*----------------------*/
-	 /*-Change home password-*/
-	/*----------------------*/
-	app.post('/home/change_password',function(req,res){
-		//Home.change_password(params);
 	});
 	
 	  /*-------------------*/
