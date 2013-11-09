@@ -20,7 +20,7 @@ module.exports = function(db,app){
 	 /*-Get user homes-*/
 	/*----------------*/
 	app.get('/user/homes', function(req,res){
-		
+		//User.get_homes(params);
 	});
 	
 	  /*---------------*/

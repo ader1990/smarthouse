@@ -24,20 +24,29 @@ exports.remove_home = function(params,cb){
 };
 
 exports.add_home = function(params,cb){
-	db.collection('users').update({'user_id':params.user_id},{$push:{'homes':params.home}},{safe:true},function(err,user_doc){
+	db.collection('users').update({'user_id':params.user_id},{$push:{'homes':params.home_id}},function(err,user_doc){
 		if(err) cb(err,null);
-		else cb(null,err);
+		else cb(null,user_doc);
 	});
 };
 
 exports.register = function (params,cb){
-	db.collection('homes').findOne({'home_id':params.home_id,'home_pass':params.home_pass},function(err,home_doc){
+	db.collection('users').findOne({'user_id':params.user_id},function(err,user_doc){
 		if(err) cb(err,null);
 		else{
-			db.collection('users').insert(params,{safe:true},function(err,user_doc){
-				if(err) cb(err,null);
-				else cb(null,200);
-			});
+			if(user_doc) cb('User already exists!',null);
+			else {
+				db.collection('users').insert(params,function(err,user_doc){
+					if(err) cb(err,null);
+					else(null,200);
+				});
+			}
 		}
-	})
+	});
+};
+exports.login = function (params,cb){
+	db.collection('users').findOne({'user_id':params.user_id,'user_pass':params.user_pass},function(err,user_doc){
+		if(err) cb(err,null);
+		else cb(null,200);
+	});
 };
