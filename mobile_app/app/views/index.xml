@@ -1,13 +1,19 @@
 <Alloy>
 	<TabGroup>
-		<Tab title="Tab 1" icon="KS_nav_ui.png">
-			<Window title="Tab 1">
-				<Label>I am Window 1</Label>
+		<Tab title="Login" icon="KS_nav_ui.png">
+			<Window title="Login">
+				<TextField id="textField1" borderStyle="Ti.UI.INPUT_BORDERSTYLE_ROUNDED" hintText="E-mail" color="#336699" right="5%" left="5%" top="10%" bottom="80%" />
+				<TextField id="textField2" borderStyle="Ti.UI.INPUT_BORDERSTYLE_ROUNDED" passwordMask="true" hintText="Password" color="#336699" right="5%" left="5%"  top="25%" bottom="65%"/>
+				 <Button id="login" title="Sign in" right="60%" left="5%" top="40%" bottom="50%"/>		 
+				 <Button id="register" title="Don't have an account?" right="5%" left="55%" top="40%" bottom="50%"/>
 			</Window>
 		</Tab>
-		<Tab title="Tab 2" icon="KS_nav_views.png">
-			<Window title="Tab 2">
-				<Label>I am Window 2</Label>
+		<Tab title="Home" icon="KS_nav_views.png">
+			<Window title="Home">
+			</Window>
+		</Tab>
+		<Tab title="Settings" icon="KS_nav_views.png">
+			<Window title="Settings">
 			</Window>
 		</Tab>
 	</TabGroup>
