@@ -1,7 +1,7 @@
 
 
 var Test = require('./../models/model_test.js');
-var Device = require('./../models/model_device.js');
+var User = require('./../models/model_user.js');
 var Home = require('./../models/model_home.js');
 
 module.exports = function(db,app){
