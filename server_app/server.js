@@ -25,7 +25,7 @@ else
 	//Express configuration
 	require('./config.js')(app);
 	
-	MongoClient.connect('mongodb://127.0.0.1:27017/test', function(err, db) {
+	MongoClient.connect('mongodb://ec2-54-220-99-234.eu-west-1.compute.amazonaws.com:27017/test', function(err, db) {
 		if(err) throw err;
 		
 		console.log('Worker #' + cluster.worker.id + ' listening on port: 3000');
