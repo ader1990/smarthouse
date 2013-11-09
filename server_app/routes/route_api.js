@@ -1,5 +1,4 @@
 
-
 var User = require('./../models/model_user.js');
 var Home = require('./../models/model_home.js');
 
@@ -24,15 +23,19 @@ module.exports = function(db,app){
       /*---------------*/
 	 /*-Get user home-*/
 	/*---------------*/
-	app.get('/user/home', function(req,res){
+	/*
+	app.get('/user/:user_id/home', function(req,res){
 		console.log('--- GET /user/home ...');
-		//User.get_home(params);
+		var params = {
+			user_id : req.
+		}
 	});
+	*/
 	
 	  /*---------------*/
 	 /*-Get user info-*/
 	/*---------------*/
-	app.get('/user/:user_id/info/', function(req,res){
+	app.get('/user/:user_id/info', function(req,res){
 		console.log('--- GET /user/:user_id/info ...');
 		var params = {
 			user_id : req.params.user_id
@@ -59,10 +62,12 @@ module.exports = function(db,app){
 		
 		User.login(db,params,function(err,status){
 			if(err){
+				console.log('>>>>>User.login : FAILURE!');
 				console.log(err);
+				res.send(err);
 			}
 			else{
-				console.log(status);
+				console.log('>>>>>User.login : SUCCESS!');
 				res.send(status);
 			}
 		});
@@ -80,11 +85,12 @@ module.exports = function(db,app){
 		}
 		User.register(db,params,function(err,status){
 			if(err) {
+				console.log('>>>>>User.register : FAILURE!');
 				console.log(err);
 				res.send(err);
 			}
 			else{
-				console.log(status);
+				console.log('>>>>>User.register : SUCCESS!');
 				res.send(status);
 			}
 		});
@@ -93,39 +99,70 @@ module.exports = function(db,app){
 	  /*---------------------*/
 	 /*-Get user home stats-*/
 	/*---------------------*/	
-	app.get('user/:user_id/home_status', function(req,res){
+	app.get('user/:user_id/home_stats', function(req,res){
+		console.log('---GET user/:user_id/home_stats ...');
 		var params = {
 			'user_id': req.params.user_id
 		}
 		User.user_house_stats(db,params, function (err, home_info){
 			if(err){
-					console.log(err);			
-			}else{
+				console.log('>>>>>User.user_house_stats : FAILURE!');
+				console.log(err);
+				res.send(500,err);
+			}
+			else{
+				console.log('>>>>>User.user_house_stats : SUCCESS!');
 				res.send(home_info);
 			}
 		});
 	});
-
+	
+	  /*---------------*/
+	 /*-Set user home-*/
+	/*---------------*/
+	app.post('user/set_home', function(req,res){
+		console.log('---POST user/add_home');
+		var params = {
+			'user_id':req.body.user_id,
+			'home_id':req.body.user_id,
+			'home_lat':req.body.latitude,
+			'home_long':req.body.longitude
+		}
+		User.set_home(db,params,function(err,status){
+			if(err){
+				console.log('>>>>>FAILURE!');
+				console.log(err);
+				res.send(500,err);
+			}
+			else{
+				console.log('<<<<<User.add_home : SUCCESS');
+				res.send(status);
+			}
+		});
+	});
 /**************************************************************************************/	
 /**************************************************************************************/
 /*							     HOME ROUTES    									  */
 /**************************************************************************************/
 /**************************************************************************************/
 	
+	
 	  /*---------------*/
 	 /*-Get home info-*/
 	/*---------------*/
 	app.get('/home/:house_id/info',function(req,res){
+		console.log('---GET home/:house_id/info');
 		var params = {
 			house_id : req.params.house_id
 		}
 		Home.get_info(db,params,function(err,home_info){
 			if(err){
+				console.log('>>>>>FAILURE!');
 				console.log(err);
 				res.send(500,err);
 			}
 			else{
-				console.log(err);
+				console.log('<<<<<SUCCESS');
 				res.send(home_info);
 			}
 		});
