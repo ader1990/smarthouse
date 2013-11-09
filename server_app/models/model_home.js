@@ -47,7 +47,7 @@ exports.get_info = function(db,params, cb){
 	});
 	
 };
-exports.turn_on_heating = function (db, params, cb){
+exports.switch_heating = function (db, params, cb){
 	db.collection('users').findOne({'user_id': params.item_id}, function(err, user){
 		if(err){
 			cb(error, null);
@@ -56,7 +56,7 @@ exports.turn_on_heating = function (db, params, cb){
 				if(err){
 					cb(err, null);
 				}else{
-					db.collection('home').update({'house_id': house.house_id},{$set {'heating_status': true}} function(err, count){
+					db.collection('home').update({'house_id': house.house_id},{$set {'heating_status': params.switch_state}} function(err, count){
 						if(err){
 							cb(err, null);
 						}else{

@@ -150,7 +150,7 @@ module.exports = function(db,app){
 	  /*---------------*/
 	 /*-Get home info-*/
 	/*---------------*/
-	app.get('/home/:house_id/info',function(req,res){
+	app.get('/home/:house_id/info',function(db, req,res){
 		console.log('---GET home/:house_id/info');
 		var params = {
 			house_id : req.params.house_id
@@ -171,25 +171,9 @@ module.exports = function(db,app){
 	  /*-------------------*/
 	 /*-Get home location-*/
 	/*-------------------*/
-	app.get('/home/location', function(req,res){
+	app.get('/home/location', function(db, req, res){
 		console.log('--- GET /home/location ...');
 		//Home.get_location;
-	});
-	/*----------------------------------------------*/
-	/*-Check if the phone is approaching the house-*/
-	/*--------------------------------------------*/
-	app.post('/user/approaching', function(req, res){
-		var params = {
-			'user_id': req.body.user_id,
-			'location': req.body.location
-		};
-		User.approaching(params, function(err, response){
-			if(err){
-				res.send(err);
-			}else{
-				res.send(response);
-			}
-		})
 	});
 	
 	  /*-----------------*/
@@ -198,6 +182,18 @@ module.exports = function(db,app){
 	app.post('/home/turn_on', function(req,res){
 		console.log('--- POST /home/turn_on ...');
 		//Home.turn_on(params);
+
+			var params = {
+			'user_id': req.body.user_id,
+ 			'heating_status': req.body.heating_status
+		};
+		Home.turn_on_heating(params, function(err, response){
+			if(err){
+				res.send(err);
+			}else{
+				res.send(response);
+			}
+		});
 	});
 	
 	  /*------------------*/
@@ -205,7 +201,19 @@ module.exports = function(db,app){
 	/*------------------*/
 	app.post('/home/turn_off',function(req,res){
 		console.log('--- POST /home/turn_off ...');
-		//Home.turn_off(params);
+		//Home.turn_on(params);
+
+		var params = {
+		'user_id': req.body.user_id,
+ 		'heating_status': req.body.heating_status
+		};
+		Home.switch_heating(params, function(err, response){
+			if(err){
+				res.send(err);
+			}else{
+				res.send(response);
+			}
+		});
 	});
 	
 	
