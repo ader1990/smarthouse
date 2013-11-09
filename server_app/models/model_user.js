@@ -1,4 +1,4 @@
-
+var geolib = require('./../node_modules/geolib/geolib.js');
 
 exports.get_all = function(db,cb){
 	console.log('Inside get_all');
@@ -93,8 +93,52 @@ exports.user_gps_delay = function (db,params, cb){
     if(err){
       cb(err,null);
     }else{
-	  var delay = user_doc.gps_delay
+	  var delay = user_doc.gps_delay;
       cb(null,delay);
     }
   });
 };
+
+//params = {user_id, location, home_id}
+exports.add_home_to_user = function (db, params, cb){
+	db.collection('homes').insert({'home_id': params.home_id, "location": params.location}, function(err, home){
+			db.collection('users').update({'user_id':params.user_id}, {'house_id': home[0].house_id}, function(err, count){
+				if(err){
+					cb(err, null);
+				}else{
+					cb(null, 200);
+				}
+			});
+		});
+};
+exports.set_home_location = function (db, params, cb){
+	db.collection('users').findOne({'user_id':params.user_id}, function(err, user){
+		if(err){
+			cb(err, null);
+		}else{
+		db.collection('homes').findAndModify({'home_id': user.home_id},{},{"location": params.location},{'new':true},  function(err, home){
+			if(err){
+				cb(err, null);
+			}else{
+				cb(null, 200);
+			}
+		});
+	}
+};
+exports.check_user_at_home = function(db, params, cb){
+
+	db.collection('users').findOne({'user_id':params.user_id}, function(err, user){
+		db.collection('homes').findOne({'home_id':user.home_id}, function(err, home){
+			var current_location = {
+				lattitude: params.lattitude,
+				longitude: params.longitude
+			};
+			var distance_to_home = geolib.getDistance(home.location, current_location);
+			var maximum_home_distance = 30; //radius, in which the user is considered to be at home
+			 
+			cb(null, distance_to_home < maximum_home_distance);
+		});
+	});
+}
+
+}
