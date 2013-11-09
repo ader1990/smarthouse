@@ -1,4 +1,3 @@
-
 var cluster = require('cluster');
 
 if (cluster.isMaster)
@@ -20,19 +19,23 @@ if (cluster.isMaster)
 else
 {
 	var express = require('express');
-	
 	var app = express();
+	var MongoClient = require('mongodb').MongoClient;
 
-		//Express configuration
+	//Express configuration
 	require('./config.js')(app);
-
-	//API routes
-	//require('./routes/route_api.js')(app);
-	app.get('/', function(req, res){
-		res.send("Worker #" + cluster.worker.id + " served this webpage.");
-	});
-
-	console.log('Worker #' + cluster.worker.id + ' listening on port: 3000');
 	
-	app.listen(30000);	
+	MongoClient.connect('mongodb://127.0.0.1:27017/test', function(err, db) {
+		if(err) throw err;
+		
+		console.log('Worker #' + cluster.worker.id + ' listening on port: 3000');
+		
+		//API Routes
+		require('./routes/route_api.js')(db,app);
+		
+		console.log('Server listening on port: 3000');
+		app.listen(3000);
+		
+	});
+	
 }
