@@ -1,18 +1,20 @@
 
-
 var Test = require('./../models/model_test.js');
 var User = require('./../models/model_user.js');
 var Home = require('./../models/model_home.js');
 
 module.exports = function(db,app){
-	app.get('/', function(req, res){
-		res.send('hello world');
-	});
 	
-	app.post('/', function(req,res){
-		Test.testAdd(db,req.body,function(err,status){
+      /*---------------*/
+	 /*-Get all users-*/
+	/*---------------*/	
+	app.get('/users',function(req,res){
+		User.get_all(db,function(err,users){
 			if(err) console.log(err);
-			else res.send(200);
+			else{
+				console.log(users);
+				res.send(users);
+			}
 		});
 	});
 	
@@ -26,8 +28,18 @@ module.exports = function(db,app){
 	  /*---------------*/
 	 /*-Get user info-*/
 	/*---------------*/
-	app.get('/user/info', function(req,res){
-		//User.get_info(params);
+	app.get('/user/info/:user_id', function(req,res){
+		var params = {
+			user_id : req.params.user_id
+		}
+		console.log(params);
+		User.get_info(db,params,function(err,user_doc){
+			if(err) console.log(err);
+			else{
+				console.log(user_doc);
+				res.send(user_doc);
+			}
+		});
 	});
 
 	  /*-------------*/
@@ -43,10 +55,19 @@ module.exports = function(db,app){
 	app.post('/user/register', function(req,res){
 	    var params = {
 			home_id:req.body.home_id,
-			home_pass:req.body.home_pass,
-			phone_nr:req.bodt.home_nr
+			user_id:req.body.user_id,
+			user_pass:req.body.user_pass
 		}
-		//Device.register(params);
+		User.register(db,params,function(err,status){
+			if(err) {
+				console.log(err);
+				res.send(err);
+			}
+			else{
+				console.log(status);
+				res.send(status);
+			}
+		});
 	});
 	
 	  /*-------------------*/

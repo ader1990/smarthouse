@@ -1,10 +1,8 @@
 
 exports.create = function(params,cb){
 
-	//params = {home_prodkey,home_latitue,home_longitude}
-	
-	
-	
+	//params = {home_prodkey,home_latitude,home_longitude}
+
 	db.collection('homes').findOne({'home_prodkey':params.home_prodkey},function(err,home_doc){
 		if(err) cb(err,null);
 		else{
@@ -34,8 +32,11 @@ exports.destroy = function(params,cb){
 	});
 };
 
-exports.update = function(){
-
+exports.update = function(params,cb){
+	//params = {}
+	db.collection('homes').findAndModify({'home_id':params.home_id},{},{},{},function(err,home_doc){
+		
+	});
 };
 
 exports.get_info = function(){
