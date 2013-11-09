@@ -1,5 +1,4 @@
 
-var db = require('./mongo.js');
 
 exports.get_all = function(db,cb){
 	console.log('Inside get_all');
@@ -76,14 +75,16 @@ exports.login = function (db,params,cb){
 	});
 };
 
-exports.house_stats = function (db,params, cb){
-  db.collection('home').findOne({'home_id':params.house_id}, function(err, home_stat){
-    if(err){ 
-      cb(err,null);
-    } else{
-      cb(null,home_stat);
-    }
-  });
+exports.user_house_stats = function (db,params, cb){
+	db.collection('users').findOne({'user_id': params.user_id}, function(err, user){
+		if(err) {
+			cb(err, null);
+		}else{
+			db.collection('homes').findOne({'home_id':user.home_id}, function(err, home){
+				cb(null, home);
+			});
+		}
+	});
 };
 
 //time after the heating should be switched off when the user has exited the house
