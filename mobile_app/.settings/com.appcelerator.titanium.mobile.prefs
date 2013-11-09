@@ -1,9 +1,9 @@
 android/ATTR_MINIFY=false
 android/ATTR_PROJECT_NAME=smarthouse_app
-android/abi=armeabi-v7a
+android/abi=x86
 android/distribute_path=C\:\\Users\\Adrian\\Desktop
 android/keystore_alias=das
-android/keystore_password=Passw0rd
+android/keystore_password=
 android/keystore_path=C\:\\Users\\Adrian\\Desktop\\alde
 android/recent_output=C\:\\Users\\Adrian\\Desktop
 android/sdk_version=Android 4.2.2
