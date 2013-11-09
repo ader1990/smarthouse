@@ -63,6 +63,20 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.index.open();
+    var url = "ec2-54-220-99-234.eu-west-1.compute.amazonaws.com:3000";
+    var client = Ti.Network.createHTTPClient({
+        onload: function() {
+            Ti.API.info("Received text: " + this.responseText);
+            alert(this.responseText);
+        },
+        onerror: function(e) {
+            Ti.API.debug(e.error);
+            alert("error");
+        },
+        timeout: 5e3
+    });
+    client.open("GET", url);
+    client.send();
     _.extend($, exports);
 }
 
