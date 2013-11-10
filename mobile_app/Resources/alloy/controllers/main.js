@@ -9,30 +9,30 @@ function Controller() {
     $.__views.main = Ti.UI.createTabGroup({
         id: "main"
     });
-    $.__views.__alloyId2 = Ti.UI.createWindow({
+    $.__views.__alloyId6 = Ti.UI.createWindow({
         backgroundColor: "#fff",
         title: "Home",
-        id: "__alloyId2"
+        id: "__alloyId6"
     });
-    $.__views.__alloyId1 = Ti.UI.createTab({
-        window: $.__views.__alloyId2,
+    $.__views.__alloyId5 = Ti.UI.createTab({
+        window: $.__views.__alloyId6,
         title: "Home",
         icon: "KS_nav_views.png",
-        id: "__alloyId1"
+        id: "__alloyId5"
     });
-    $.__views.main.addTab($.__views.__alloyId1);
-    $.__views.__alloyId4 = Ti.UI.createWindow({
+    $.__views.main.addTab($.__views.__alloyId5);
+    $.__views.__alloyId8 = Ti.UI.createWindow({
         backgroundColor: "#fff",
         title: "Settings",
-        id: "__alloyId4"
+        id: "__alloyId8"
     });
-    $.__views.__alloyId3 = Ti.UI.createTab({
-        window: $.__views.__alloyId4,
+    $.__views.__alloyId7 = Ti.UI.createTab({
+        window: $.__views.__alloyId8,
         title: "Settings",
         icon: "KS_nav_views.png",
-        id: "__alloyId3"
+        id: "__alloyId7"
     });
-    $.__views.main.addTab($.__views.__alloyId3);
+    $.__views.main.addTab($.__views.__alloyId7);
     $.__views.main && $.addTopLevelView($.__views.main);
     exports.destroy = function() {};
     _.extend($, $.__views);

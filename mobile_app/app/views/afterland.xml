@@ -1,6 +1,13 @@
 <Alloy>
 	<Window title="AfterLand">
-        <ImageView id="image" image="/images/Temprico.png" />
-        <ImageView id="image" image="/images/place_for_degrees.png" />
+        <ImageView id="image" image="/images/Temprico.png" top="10%" left="10%" right="10%"/>
+        <ImageView id="image" image="/images/place_for_degrees.png" top="25%" left="35%" right="35%"/>
+        <Label top="15%" left="45%" color="red" fontext="bold" right="30%">99.9F\u00B0</Label>
+        <Label top="25%" left="35%" color="black" fontext="bold" right="35%">The product that</Label>
+        <Label top="30%" left="35%" color="black" fontext="bold" right="35%">brings home heating</Label>
+        <Label top="35%" left="35%" color="black" fontext="bold" right="35%">to the 21st century.</Label>
+        
+		<Button id="login" title="Sign in" top="70%" bottom="20%" width="50%" left="30%" right="30%"/>
+		<Button id="register" title="Don't have an account?" top="75%" bottom="10%"  width="50%" left="30%" right="30%"/>
 	</Window>
 </Alloy>
