@@ -97,15 +97,21 @@ exports.user_gps_delay = function (db,params, cb){
 //params = {user_id, location, home_id}
 //binds a home to a user
 exports.set_home = function (db, params, cb){
+
+	var home = {
+		'home_id':params.home_id,
+		'location':params.location,
+		'home_type':params.home_type
+	}
 	db.collection('homes').insert({'home_id': params.home_id, "location": params.location, 'home_type': params.home_type}, function(err, home){
-			db.collection('users').update({'user_id':params.user_id}, {$set: {'house_id': home[0].house_id}}, function(err, count){
-				if(err){
-					cb(err, null);
-				}else{
-					cb(null, 200);
-				}
-			});
+		db.collection('users').update({'user_id':params.user_id}, {$set: {'house_id': home[0].house_id}}, function(err, count){
+			if(err){
+				cb(err, null);
+			}else{
+				cb(null, 200);
+			}
 		});
+	});
 };
 
 
@@ -123,9 +129,4 @@ exports.check_user_at_home = function(db, params, cb){
 			cb(null, distance_to_home < maximum_home_distance);
 		});
 	});
-}
-
-// params = {user_id, eta}
-
-
 }

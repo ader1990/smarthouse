@@ -30,12 +30,12 @@ exports.destroy = function(db,params,cb){
 	});
 };
 
-exports.update = function(params,cb){
+/*exports.update = function(params,cb){
 	//params = {}
 	db.collection('homes').findAndModify({'home_id':params.home_id},{},{},{},function(err,home_doc){
 		
 	});
-};
+};*/
 
 exports.get_info = function(db,params, cb){
 	db.collection('homes').findOne({'home_id':params.home_id}, function(err, home_info){
@@ -52,17 +52,11 @@ exports.switch_heating = function (db, params, cb){
 		if(err){
 			cb(error, null);
 		}else{
-			db.collection('homes').findOne({'house_id': user.house_id}, function(err, house){
+			db.collection('homes').update({'house_id': user.house_id},{$set:{'heating_status': params.heating_status}}, function(err, count){
 				if(err){
 					cb(err, null);
 				}else{
-					db.collection('home').update({'house_id': house.house_id},{$set {'heating_status': params.switch_state}} function(err, count){
-						if(err){
-							cb(err, null);
-						}else{
-							cb(null, 200);
-						}
-					});
+					cb(null, 200);
 				}
 			});
 		}
