@@ -58,7 +58,7 @@ function Controller() {
     var Alloy = require("alloy");
     var db = Ti.App.Properties;
     var userLoggedInKey = "userLoggedIn";
-    db.setBool(userLoggedInKey, true);
+    db.setBool(userLoggedInKey, false);
     var openPage = function(pageName) {
         var page = Alloy.createController(pageName).getView();
         page.open();
