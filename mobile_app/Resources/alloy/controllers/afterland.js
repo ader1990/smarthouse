@@ -84,6 +84,7 @@ function Controller() {
         id: "__alloyId3"
     });
     $.__views.afterland.add($.__views.__alloyId3);
+<<<<<<< HEAD
     $.__views.tryLogin = Ti.UI.createButton({
         right: "15%",
         left: "15%",
@@ -103,6 +104,26 @@ function Controller() {
         id: "tryRegister",
         title: "Don't have an account?",
         width: "70%"
+=======
+    $.__views.login = Ti.UI.createButton({
+        right: "30%",
+        left: "30%",
+        top: "70%",
+        bottom: "20%",
+        id: "login",
+        title: "Sign in",
+        width: "50%"
+    });
+    $.__views.afterland.add($.__views.login);
+    $.__views.register = Ti.UI.createButton({
+        right: "30%",
+        left: "30%",
+        top: "75%",
+        bottom: "10%",
+        id: "register",
+        title: "Don't have an account?",
+        width: "50%"
+>>>>>>> df4e3ea586c887330169eddcc7dade1dd5738c44
     });
     $.__views.afterland.add($.__views.tryRegister);
     tryRegister ? $.__views.tryRegister.addEventListener("click", tryRegister) : __defers["$.__views.tryRegister!click!tryRegister"] = true;

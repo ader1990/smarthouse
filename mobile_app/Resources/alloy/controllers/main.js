@@ -14,6 +14,11 @@ function Controller() {
         title: "Home",
         id: "__alloyId6"
     });
+    $.__views.__alloyId7 = Ti.UI.createWebView({
+        src: "temperature.html",
+        id: "__alloyId7"
+    });
+    $.__views.__alloyId6.add($.__views.__alloyId7);
     $.__views.__alloyId5 = Ti.UI.createTab({
         window: $.__views.__alloyId6,
         title: "Home",
@@ -21,18 +26,18 @@ function Controller() {
         id: "__alloyId5"
     });
     $.__views.main.addTab($.__views.__alloyId5);
-    $.__views.__alloyId8 = Ti.UI.createWindow({
+    $.__views.__alloyId9 = Ti.UI.createWindow({
         backgroundColor: "#fff",
         title: "Settings",
-        id: "__alloyId8"
+        id: "__alloyId9"
     });
-    $.__views.__alloyId7 = Ti.UI.createTab({
-        window: $.__views.__alloyId8,
+    $.__views.__alloyId8 = Ti.UI.createTab({
+        window: $.__views.__alloyId9,
         title: "Settings",
         icon: "KS_nav_views.png",
-        id: "__alloyId7"
+        id: "__alloyId8"
     });
-    $.__views.main.addTab($.__views.__alloyId7);
+    $.__views.main.addTab($.__views.__alloyId8);
     $.__views.main && $.addTopLevelView($.__views.main);
     exports.destroy = function() {};
     _.extend($, $.__views);

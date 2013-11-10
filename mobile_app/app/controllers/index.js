@@ -19,7 +19,7 @@ var startAfterLanding = function() {
 };
 
 var userLoggedIn = db.getBool(userLoggedInKey);
-if (!userLoggedIn) {
+if (userLoggedIn) {
 	startAfterLanding();
 } else {
 	startMain();
