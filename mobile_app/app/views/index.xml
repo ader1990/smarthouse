@@ -2,8 +2,8 @@
 	<Window title="Login">
 		<TextField id="email" borderStyle="Ti.UI.INPUT_BORDERSTYLE_ROUNDED" hintText="E-mail" />
 		<TextField id="password" borderStyle="Ti.UI.INPUT_BORDERSTYLE_ROUNDED" passwordMask="true" hintText="Password"/>
-		<Button id="login" title="Sign in" />
-		<Button id="register" title="Don't have an account?" />
+		<Button id="login" title="Sign In" />
+		<Button id="register" title="Sign Up" />
 	</Window>
 </Alloy>
 

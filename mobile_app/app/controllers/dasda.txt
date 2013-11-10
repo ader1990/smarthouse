@@ -1,38 +1,32 @@
 $.afterland.open();
 var Alloy = require('alloy');
 var baseUrl = "ec2-54-220-99-234.eu-west-1.compute.amazonaws.com:3000";
-var db = Ti.App.Properties;
-var userLoggedInKey = "userLoggedIn";
-var userToken = "userToken";
 
 var openPage = function(pageName) {
 	var page = Alloy.createController(pageName).getView();
 	page.open();
 };
 
-var webClient = function(onSuccess, onError) {
+var webClient = function(onSuccess, onError){
 	var client = Ti.Network.createHTTPClient({
-		// function called when the response data is available
-		onload : function(e) {
-			if (onSuccess) {
-				onSuccess(this.responseText);
+	// function called when the response data is available
+	onload : function(e) {
+		if(onSuccess){
+			onSuccess(this.responseText);
 			}
-		},
-		// function called when an error occurs, including a timeout
-		onerror : function(e) {
-			if (onError) {
-				onError();
+	},
+	// function called when an error occurs, including a timeout
+	onerror : function(e) {
+		if(onError){
+			onError();
 			}
-		},
-		timeout : 5000 // in milliseconds
-	});
-	return client;
-};
+	},
+	timeout : 5000 // in milliseconds
+});
 
 var saveData = function(data, endpoint, onSuccess, onError) {
-	var w = webClient(onSuccess, onError);
-	w.open("POST", baseUrl + endpoint);
-	w.send(data);
+	webClient().open("POST", baseUrl + endpoint, onSuccess, onError);
+	webClient().send(data);
 };
 
 var registerPageWindow = function() {
@@ -130,18 +124,19 @@ var registerPageWindow = function() {
 	win.add(registerButton);
 
 	registerButton.addEventListener('click', function(e) {
-		var userId = username.value;
-		var userPassword = password.value;
-		var userEmail = email.value;
+		alert("Click");
+		var userId = "das";
+		var userPassword = "daspass";
+		var userEmail = "dasemail";
 		saveData({
 			user_id : userId,
 			user_pass : userPassword,
 			user_mail : userEmail
-		}, '/user/register', function(data) {
-			db.setBool(userLoggedInKey, true);
-			db.setString(userToken, userPassword);
-			openPage("index");
-		});
+		}, 
+		'/user/register',
+		function(data){
+			alert(data);
+			});
 	});
 
 	return win;

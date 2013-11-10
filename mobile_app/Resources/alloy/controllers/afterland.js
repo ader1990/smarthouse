@@ -1,9 +1,9 @@
 function Controller() {
     function tryLogin() {
-        startLogin();
+        loginPageWindow().open();
     }
     function tryRegister() {
-        startRegister();
+        registerPageWindow().open();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "afterland";
@@ -110,9 +110,30 @@ function Controller() {
     _.extend($, $.__views);
     $.afterland.open();
     var Alloy = require("alloy");
+    var baseUrl = "ec2-54-220-99-234.eu-west-1.compute.amazonaws.com:3000";
+    var db = Ti.App.Properties;
+    var userLoggedInKey = "userLoggedIn";
+    var userToken = "userToken";
     var openPage = function(pageName) {
         var page = Alloy.createController(pageName).getView();
         page.open();
+    };
+    var webClient = function(onSuccess, onError) {
+        var client = Ti.Network.createHTTPClient({
+            onload: function() {
+                onSuccess && onSuccess(this.responseText);
+            },
+            onerror: function() {
+                onError && onError();
+            },
+            timeout: 5e3
+        });
+        return client;
+    };
+    var saveData = function(data, endpoint, onSuccess, onError) {
+        var w = webClient(onSuccess, onError);
+        w.open("POST", baseUrl + endpoint);
+        w.send(data);
     };
     var registerPageWindow = function() {
         var win = Titanium.UI.createWindow({
@@ -150,41 +171,76 @@ function Controller() {
             hintText: "Password"
         });
         win.add(password);
-        var postcode = Ti.UI.createTextField({
+        var passwordRepeat = Ti.UI.createTextField({
             autocapitalization: Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
             top: "35%",
             bottom: "55%",
             left: "5%",
             right: "5%",
             borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
-            hintText: "Postcode"
+            passwordMask: true,
+            hintText: "Repeat Password"
         });
-        win.add(postcode);
-        var productCode = Ti.UI.createTextField({
-            autocapitalization: Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
-            top: "45%",
-            bottom: "45%",
-            left: "5%",
-            right: "5%",
-            borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
-            hintText: "Product Code"
-        });
-        win.add(productCode);
+        win.add(passwordRepeat);
         var registerButton = Titanium.UI.createButton({
             title: "Sign Up",
-            top: "55%",
-            bottom: "35%",
+            top: "45%",
+            bottom: "45%",
             left: "30%",
             right: "30%"
         });
         win.add(registerButton);
+        registerButton.addEventListener("click", function() {
+            var userId = username.value;
+            var userPassword = password.value;
+            var userEmail = email.value;
+            saveData({
+                user_id: userId,
+                user_pass: userPassword,
+                user_mail: userEmail
+            }, "/user/register", function() {
+                db.setBool(userLoggedInKey, true);
+                db.setString(userToken, userPassword);
+                openPage("index");
+            });
+        });
         return win;
     };
-    var startRegister = function() {
-        registerPageWindow().open();
-    };
-    var startLogin = function() {
-        openPage("login");
+    var loginPageWindow = function() {
+        var win = Titanium.UI.createWindow({
+            title: "Register",
+            backgroundColor: "#fff"
+        });
+        var username = Ti.UI.createTextField({
+            autocapitalization: Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
+            top: "5%",
+            bottom: "85%",
+            left: "5%",
+            right: "5%",
+            borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+            hintText: "Username"
+        });
+        win.add(username);
+        var password = Ti.UI.createTextField({
+            autocapitalization: Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
+            top: "15%",
+            bottom: "75%",
+            left: "5%",
+            right: "5%",
+            borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+            passwordMask: true,
+            hintText: "Password"
+        });
+        win.add(password);
+        var loginButton = Titanium.UI.createButton({
+            title: "Sign In",
+            top: "25%",
+            bottom: "65%",
+            left: "30%",
+            right: "30%"
+        });
+        win.add(loginButton);
+        return win;
     };
     __defers["$.__views.tryLogin!click!tryLogin"] && $.__views.tryLogin.addEventListener("click", tryLogin);
     __defers["$.__views.tryRegister!click!tryRegister"] && $.__views.tryRegister.addEventListener("click", tryRegister);

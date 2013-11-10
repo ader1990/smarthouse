@@ -41,7 +41,7 @@ function Controller() {
         top: "40%",
         bottom: "50%",
         id: "login",
-        title: "Sign in"
+        title: "Sign In"
     });
     $.__views.index.add($.__views.login);
     $.__views.register = Ti.UI.createButton({
@@ -50,7 +50,7 @@ function Controller() {
         top: "40%",
         bottom: "50%",
         id: "register",
-        title: "Don't have an account?"
+        title: "Sign Up"
     });
     $.__views.index.add($.__views.register);
     exports.destroy = function() {};
@@ -58,7 +58,6 @@ function Controller() {
     var Alloy = require("alloy");
     var db = Ti.App.Properties;
     var userLoggedInKey = "userLoggedIn";
-    db.setBool(userLoggedInKey, false);
     var openPage = function(pageName) {
         var page = Alloy.createController(pageName).getView();
         page.open();
