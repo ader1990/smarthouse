@@ -187,7 +187,7 @@ module.exports = function(db,app){
 			'user_id': req.body.user_id,
  			'heating_status': req.body.heating_status
 		};
-		Home.turn_on_heating(params, function(err, response){
+		Home.switch_heating(params, function(err, response){
 			if(err){
 				res.send(err);
 			}else{
@@ -207,11 +207,13 @@ module.exports = function(db,app){
 		'user_id': req.body.user_id,
  		'heating_status': req.body.heating_status
 		};
-		Home.switch_heating(params, function(err, response){
+		Home.switch_heating(db, params, function(err, response){
 			if(err){
+				console.log(err);
 				res.send(err);
 			}else{
-				res.send(response);
+				console.log(response)
+;				res.send(response);
 			}
 		});
 	});

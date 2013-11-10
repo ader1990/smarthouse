@@ -97,8 +97,18 @@ exports.user_gps_delay = function (db,params, cb){
 //params = {user_id, location, home_id}
 //binds a home to a user
 exports.set_home = function (db, params, cb){
-	db.collection('homes').insert({'home_id': params.home_id, "location": params.location, 'home_type': params.home_type}, function(err, home){
-			db.collection('users').update({'user_id':params.user_id}, {$set: {'house_id': home[0].house_id}}, function(err, count){
+	
+	var room_nr = req.body.nr_rooms;
+	var lr_bool = req.body.lr_bool;
+	var home_type = req.body.home_type;
+	ht(room_nr,lr_bool,home_type,function(heat_time){
+		var home = {
+			'home_id':params.home_id,
+			'location':params.location,
+			'heat_time':heat_time
+		}
+		db.collection('homes').insert(home, function(err, home_doc){
+			db.collection('users').update({'user_id':params.user_id}, {$set: {'house_id': home_doc[0].house_id}}, function(err, count){
 				if(err){
 					cb(err, null);
 				}else{
@@ -106,11 +116,11 @@ exports.set_home = function (db, params, cb){
 				}
 			});
 		});
+	});
 };
 
 
 exports.check_user_at_home = function(db, params, cb){
-
 	db.collection('users').findOne({'user_id':params.user_id}, function(err, user){
 		db.collection('homes').findOne({'home_id':user.home_id}, function(err, home){
 			var current_location = {
@@ -125,7 +135,21 @@ exports.check_user_at_home = function(db, params, cb){
 	});
 }
 
-// params = {user_id, eta}
 
-
+function ht(nr_rooms,lr_bool,home_type,cb){	
+	
+	//0-detached, 1-semi-detached, 2-terrace, 3-flat
+	
+	var roof_uval = [0.41,0.41,0.41,0];
+	var	windows_uval=[4.8,3.1,3.1,4.8];
+	var	door_uval=[3.7,3.7,3.7,0];
+	var	walls_uval=[0.6,1.37,1.37,0.6];
+	var	roof_area=[90,36,36,0];
+	var	windows_area=[nr_rooms*1.5,nr_rooms*1.5+3];
+	var	wall_area=[154,93,48,45.8];
+	
+	
+	var heat_time = 15*(roof_uval[home_type] * roof_area[home_type] + windows_uval[home_type]*windows_area[lr_bool] + door_uval[home_type]*2 + walls_uval[home_type]*wall_area[home_type]);
+	cb(heat_time);
 }
+
