@@ -108,7 +108,6 @@ function Controller() {
     tryRegister ? $.__views.tryRegister.addEventListener("click", tryRegister) : __defers["$.__views.tryRegister!click!tryRegister"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    $.afterland.open();
     var Alloy = require("alloy");
     var baseUrl = "ec2-54-220-99-234.eu-west-1.compute.amazonaws.com:3000";
     var db = Ti.App.Properties;

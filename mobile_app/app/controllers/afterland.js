@@ -1,4 +1,4 @@
-$.afterland.open();
+//$.afterland.open();
 var Alloy = require('alloy');
 var baseUrl = "ec2-54-220-99-234.eu-west-1.compute.amazonaws.com:3000";
 var db = Ti.App.Properties;
@@ -86,40 +86,6 @@ var registerPageWindow = function() {
 		hintText : 'Repeat Password'
 	});
 	win.add(passwordRepeat);
-
-	/*var lat = Ti.UI.createTextField({
-	 autocapitalization : Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
-	 top : '35%',
-	 bottom : '55%',
-	 left : '5%',
-	 right : '55%',
-	 borderStyle : Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
-	 hintText : 'Latitude'
-	 });
-	 win.add(lat);
-
-	 var lon = Ti.UI.createTextField({
-	 autocapitalization : Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
-	 top : '35%',
-	 bottom : '55%',
-	 left : '45%',
-	 right : '5%',
-	 borderStyle : Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
-	 hintText : 'Longitude'
-	 });
-	 win.add(lon);
-
-	 var productCode = Ti.UI.createTextField({
-	 autocapitalization : Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
-	 top : '45%',
-	 bottom : '45%',
-	 left : '5%',
-	 right : '5%',
-	 borderStyle : Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
-	 hintText : 'Product Code'
-	 });
-	 win.add(productCode);
-	 */
 	var registerButton = Titanium.UI.createButton({
 		title : 'Sign Up',
 		top : '45%',
