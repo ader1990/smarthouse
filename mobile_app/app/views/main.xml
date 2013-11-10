@@ -1,12 +1,10 @@
 <Alloy>
 	<TabGroup>
 		<Tab title="Home" icon="KS_nav_views.png">
-			<Window title="Home">
-			</Window>
+			<Window title="Home"></Window>
 		</Tab>
 		<Tab title="Settings" icon="KS_nav_views.png">
-			<Window title="Settings">
-			</Window>
+			<Window title="Settings"></Window>
 		</Tab>
-		</TabGroup>
+	</TabGroup>
 </Alloy>

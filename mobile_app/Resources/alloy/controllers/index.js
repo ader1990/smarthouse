@@ -45,8 +45,8 @@ function Controller() {
     });
     $.__views.index.add($.__views.login);
     $.__views.register = Ti.UI.createButton({
-        right: "5%",
-        left: "55%",
+        right: "60%",
+        left: "5%",
         top: "40%",
         bottom: "50%",
         id: "register",
@@ -66,11 +66,11 @@ function Controller() {
     var startMain = function() {
         openPage("main");
     };
-    var startLanding = function() {
-        openPage("landing");
+    var startPrepareLanding = function() {
+        openPage("planding");
     };
     var userLoggedIn = db.getBool(userLoggedInKey);
-    userLoggedIn ? startMain() : startLanding();
+    userLoggedIn ? startMain() : startPrepareLanding();
     _.extend($, exports);
 }
 

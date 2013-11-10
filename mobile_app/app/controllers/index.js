@@ -14,10 +14,13 @@ var startMain = function() {
 var startLanding = function() {
 	openPage("landing");
 };
+var startPrepareLanding = function() {
+	openPage("planding");
+};
 
 var userLoggedIn = db.getBool(userLoggedInKey);
 if (!userLoggedIn) {
-	startLanding();
+	startPrepareLanding();
 } else {
 	startMain();
 }
