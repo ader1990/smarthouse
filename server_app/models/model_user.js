@@ -116,7 +116,6 @@ exports.set_home = function (db, params, cb){
 
 
 exports.check_user_at_home = function(db, params, cb){
-
 	db.collection('users').findOne({'user_id':params.user_id}, function(err, user){
 		db.collection('homes').findOne({'home_id':user.home_id}, function(err, home){
 			var current_location = {
