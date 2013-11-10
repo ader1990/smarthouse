@@ -30,14 +30,14 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0016,
+    priority: 1000.0019,
     key: "Window",
     style: {
         backgroundColor: "#fff"
     }
 }, {
     isApi: true,
-    priority: 1000.0017,
+    priority: 1000.002,
     key: "Label",
     style: {
         width: Ti.UI.SIZE,

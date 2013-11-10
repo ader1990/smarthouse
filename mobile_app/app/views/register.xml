@@ -1,0 +1,8 @@
+<Alloy>
+	<Window title="Register">
+		<TextField id="textField1" borderStyle="Ti.UI.INPUT_BORDERSTYLE_ROUNDED" hintText="E-mail" color="#336699" right="5%" left="5%" top="10%" bottom="80%" />
+		<TextField id="textField2" borderStyle="Ti.UI.INPUT_BORDERSTYLE_ROUNDED" passwordMask="true" hintText="Password" color="#336699" right="5%" left="5%"  top="25%" bottom="65%"/>
+		<Button id="login" title="Sign in" right="60%" left="5%" top="40%" bottom="50%"/>
+	</Window>
+</Alloy>
+

@@ -1,4 +1,10 @@
 function Controller() {
+    function tryLogin() {
+        startLogin();
+    }
+    function tryRegister() {
+        startRegister();
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "afterland";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
@@ -6,6 +12,7 @@ function Controller() {
     arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
+    var __defers = {};
     $.__views.afterland = Ti.UI.createWindow({
         backgroundColor: "#fff",
         title: "AfterLand",
@@ -29,13 +36,13 @@ function Controller() {
     });
     $.__views.afterland.add($.__views.image);
     $.__views.__alloyId0 = Ti.UI.createLabel({
-        top: "15%",
+        top: "12%",
         width: "300dp",
         height: "200dp",
         text: "99.9F°",
         left: "45%",
         color: "red",
-        fontext: "bold",
+        fonttext: "bold",
         right: "30%",
         id: "__alloyId0"
     });
@@ -48,6 +55,7 @@ function Controller() {
         left: "35%",
         color: "black",
         fontext: "bold",
+        fontSize: "50dp",
         right: "35%",
         id: "__alloyId1"
     });
@@ -76,27 +84,44 @@ function Controller() {
         id: "__alloyId3"
     });
     $.__views.afterland.add($.__views.__alloyId3);
-    $.__views.login = Ti.UI.createButton({
-        right: "60%",
-        left: "5%",
+    $.__views.tryLogin = Ti.UI.createButton({
+        right: "15%",
+        left: "15%",
         top: "70%",
         bottom: "20%",
-        id: "login",
-        title: "Sign in"
+        id: "tryLogin",
+        title: "Sign in",
+        width: "70%"
     });
-    $.__views.afterland.add($.__views.login);
-    $.__views.register = Ti.UI.createButton({
-        right: "60%",
-        left: "5%",
+    $.__views.afterland.add($.__views.tryLogin);
+    tryLogin ? $.__views.tryLogin.addEventListener("click", tryLogin) : __defers["$.__views.tryLogin!click!tryLogin"] = true;
+    $.__views.tryRegister = Ti.UI.createButton({
+        right: "15%",
+        left: "15%",
         top: "80%",
         bottom: "10%",
-        id: "register",
-        title: "Don't have an account?"
+        id: "tryRegister",
+        title: "Don't have an account?",
+        width: "70%"
     });
-    $.__views.afterland.add($.__views.register);
+    $.__views.afterland.add($.__views.tryRegister);
+    tryRegister ? $.__views.tryRegister.addEventListener("click", tryRegister) : __defers["$.__views.tryRegister!click!tryRegister"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.afterland.open();
+    var Alloy = require("alloy");
+    var openPage = function(pageName) {
+        var page = Alloy.createController(pageName).getView();
+        page.open();
+    };
+    var startRegister = function() {
+        openPage("register");
+    };
+    var startLogin = function() {
+        openPage("login");
+    };
+    __defers["$.__views.tryLogin!click!tryLogin"] && $.__views.tryLogin.addEventListener("click", tryLogin);
+    __defers["$.__views.tryRegister!click!tryRegister"] && $.__views.tryRegister.addEventListener("click", tryRegister);
     _.extend($, exports);
 }
 
