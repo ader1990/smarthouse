@@ -14,13 +14,13 @@ var startMain = function() {
 var startLanding = function() {
 	openPage("landing");
 };
-var startPrepareLanding = function() {
-	openPage("planding");
+var startAfterLanding = function() {
+	openPage("afterland");
 };
 
 var userLoggedIn = db.getBool(userLoggedInKey);
 if (!userLoggedIn) {
-	startPrepareLanding();
+	startAfterLanding();
 } else {
 	startMain();
 }

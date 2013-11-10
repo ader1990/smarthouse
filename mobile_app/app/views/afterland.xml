@@ -1,0 +1,5 @@
+<Alloy>
+	<Window title="AfterLand">
+        <ImageView id="image" image="/images/Temprico.png" />
+	</Window>
+</Alloy>
