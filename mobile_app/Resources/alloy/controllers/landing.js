@@ -1,17 +1,17 @@
 function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
-    this.__controllerPath = "index";
+    this.__controllerPath = "landing";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
     arguments[0] ? arguments[0]["$model"] : null;
     arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
-    $.__views.index = Ti.UI.createWindow({
+    $.__views.landing = Ti.UI.createWindow({
         backgroundColor: "#fff",
         title: "Login",
-        id: "index"
+        id: "landing"
     });
-    $.__views.index && $.addTopLevelView($.__views.index);
+    $.__views.landing && $.addTopLevelView($.__views.landing);
     $.__views.textField1 = Ti.UI.createTextField({
         id: "textField1",
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
@@ -22,7 +22,7 @@ function Controller() {
         top: "10%",
         bottom: "80%"
     });
-    $.__views.index.add($.__views.textField1);
+    $.__views.landing.add($.__views.textField1);
     $.__views.textField2 = Ti.UI.createTextField({
         id: "textField2",
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
@@ -34,7 +34,7 @@ function Controller() {
         top: "25%",
         bottom: "65%"
     });
-    $.__views.index.add($.__views.textField2);
+    $.__views.landing.add($.__views.textField2);
     $.__views.login = Ti.UI.createButton({
         id: "login",
         title: "Sign in",
@@ -43,7 +43,7 @@ function Controller() {
         top: "40%",
         bottom: "50%"
     });
-    $.__views.index.add($.__views.login);
+    $.__views.landing.add($.__views.login);
     $.__views.register = Ti.UI.createButton({
         id: "register",
         title: "Don't have an account?",
@@ -52,25 +52,10 @@ function Controller() {
         top: "40%",
         bottom: "50%"
     });
-    $.__views.index.add($.__views.register);
+    $.__views.landing.add($.__views.register);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var Alloy = require("alloy");
-    var db = Ti.App.Properties;
-    var userLoggedInKey = "userLoggedIn";
-    db.setBool(userLoggedInKey, true);
-    var openPage = function(pageName) {
-        var page = Alloy.createController(pageName).getView();
-        page.open();
-    };
-    var startMain = function() {
-        openPage("main");
-    };
-    var startLanding = function() {
-        openPage("landing");
-    };
-    var userLoggedIn = db.getBool(userLoggedInKey);
-    userLoggedIn ? startMain() : startLanding();
+    $.landing.open();
     _.extend($, exports);
 }
 
