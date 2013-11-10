@@ -1,8 +1,10 @@
 <Alloy>
 	<TabGroup>
 		<Tab title="Home" icon="KS_nav_views.png">
-			<Window title="Home"></Window>
-			<Label title="Home"> Check out your home </Label>
+			<Window title="Home">
+				<WebView src="temperature.html"> </WebView>
+			</Window>
+			
 			
 		</Tab>
 		<Tab title="Settings" icon="KS_nav_views.png">
