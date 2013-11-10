@@ -1,8 +1,11 @@
 <Alloy>
 	<Window title="Register">
-		<TextField id="textField1" borderStyle="Ti.UI.INPUT_BORDERSTYLE_ROUNDED" hintText="E-mail" color="#336699" right="5%" left="5%" top="10%" bottom="80%" />
-		<TextField id="textField2" borderStyle="Ti.UI.INPUT_BORDERSTYLE_ROUNDED" passwordMask="true" hintText="Password" color="#336699" right="5%" left="5%"  top="25%" bottom="65%"/>
-		<Button id="login" title="Sign in" right="60%" left="5%" top="40%" bottom="50%"/>
+		<TextField id="nameRegister" borderStyle="Ti.UI.INPUT_BORDERSTYLE_ROUNDED" hintText="Name" color="#336699" right="5%" left="5%" top="5%" bottom="85%" />
+		<TextField id="emailRegister" borderStyle="Ti.UI.INPUT_BORDERSTYLE_ROUNDED" hintText="E-mail" color="#336699" right="5%" left="5%" top="15%" bottom="75%" />
+		<TextField id="passwordRegister" borderStyle="Ti.UI.INPUT_BORDERSTYLE_ROUNDED" passwordMask="true" hintText="Password" color="#336699" right="5%" left="5%"  top="25%" bottom="65%"/>
+		<TextField id="postcodeRegister" borderStyle="Ti.UI.INPUT_BORDERSTYLE_ROUNDED"  hintText="Postcode" color="#336699" right="5%" left="5%"  top="35%" bottom="55%"/>
+		<TextField id="prodcutCodeRegister" borderStyle="Ti.UI.INPUT_BORDERSTYLE_ROUNDED" hintText="Product Code" color="#336699" right="5%" left="5%"  top="45%" bottom="45%"/>
+		<Button id="submitLogin" title="Sign Up" right="30%" left="30%" top="55%" bottom="35%"/>
 	</Window>
 </Alloy>
 

@@ -70,7 +70,7 @@ function Controller() {
         openPage("afterland");
     };
     var userLoggedIn = db.getBool(userLoggedInKey);
-    userLoggedIn ? startAfterLanding() : startMain();
+    userLoggedIn ? startMain() : startAfterLanding();
     _.extend($, exports);
 }
 

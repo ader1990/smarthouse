@@ -12,47 +12,71 @@ function Controller() {
         id: "register"
     });
     $.__views.register && $.addTopLevelView($.__views.register);
-    $.__views.textField1 = Ti.UI.createTextField({
+    $.__views.nameRegister = Ti.UI.createTextField({
         color: "#336699",
         right: "5%",
         left: "5%",
-        top: "10%",
-        bottom: "80%",
-        id: "textField1",
+        top: "5%",
+        bottom: "85%",
+        id: "nameRegister",
+        borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        hintText: "Name"
+    });
+    $.__views.register.add($.__views.nameRegister);
+    $.__views.emailRegister = Ti.UI.createTextField({
+        color: "#336699",
+        right: "5%",
+        left: "5%",
+        top: "15%",
+        bottom: "75%",
+        id: "emailRegister",
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         hintText: "E-mail"
     });
-    $.__views.register.add($.__views.textField1);
-    $.__views.textField2 = Ti.UI.createTextField({
+    $.__views.register.add($.__views.emailRegister);
+    $.__views.passwordRegister = Ti.UI.createTextField({
         color: "#336699",
         right: "5%",
         left: "5%",
         top: "25%",
         bottom: "65%",
-        id: "textField2",
+        id: "passwordRegister",
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         passwordMask: "true",
         hintText: "Password"
     });
-    $.__views.register.add($.__views.textField2);
-    $.__views.login = Ti.UI.createButton({
-        right: "60%",
-        left: "5%",
-        top: "40%",
-        bottom: "50%",
-        id: "login",
-        title: "Sign in"
-    });
-    $.__views.register.add($.__views.login);
-    $.__views.register = Ti.UI.createButton({
+    $.__views.register.add($.__views.passwordRegister);
+    $.__views.postcodeRegister = Ti.UI.createTextField({
+        color: "#336699",
         right: "5%",
-        left: "55%",
-        top: "40%",
-        bottom: "50%",
-        id: "register",
-        title: "Don't have an account?"
+        left: "5%",
+        top: "35%",
+        bottom: "55%",
+        id: "postcodeRegister",
+        borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        hintText: "Postcode"
     });
-    $.__views.register.add($.__views.register);
+    $.__views.register.add($.__views.postcodeRegister);
+    $.__views.prodcutCodeRegister = Ti.UI.createTextField({
+        color: "#336699",
+        right: "5%",
+        left: "5%",
+        top: "45%",
+        bottom: "45%",
+        id: "prodcutCodeRegister",
+        borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        hintText: "Product Code"
+    });
+    $.__views.register.add($.__views.prodcutCodeRegister);
+    $.__views.submitLogin = Ti.UI.createButton({
+        right: "30%",
+        left: "30%",
+        top: "55%",
+        bottom: "35%",
+        id: "submitLogin",
+        title: "Register"
+    });
+    $.__views.register.add($.__views.submitLogin);
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.register.open();

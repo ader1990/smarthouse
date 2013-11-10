@@ -12,47 +12,38 @@ function Controller() {
         id: "login"
     });
     $.__views.login && $.addTopLevelView($.__views.login);
-    $.__views.textField1 = Ti.UI.createTextField({
+    $.__views.emailLogin = Ti.UI.createTextField({
         color: "#336699",
         right: "5%",
         left: "5%",
-        top: "10%",
-        bottom: "80%",
-        id: "textField1",
+        top: "5%",
+        bottom: "85%",
+        id: "emailLogin",
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         hintText: "E-mail"
     });
-    $.__views.login.add($.__views.textField1);
-    $.__views.textField2 = Ti.UI.createTextField({
+    $.__views.login.add($.__views.emailLogin);
+    $.__views.passwordLogin = Ti.UI.createTextField({
         color: "#336699",
         right: "5%",
         left: "5%",
-        top: "25%",
-        bottom: "65%",
-        id: "textField2",
+        top: "15%",
+        bottom: "75%",
+        id: "passwordLogin",
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         passwordMask: "true",
         hintText: "Password"
     });
-    $.__views.login.add($.__views.textField2);
-    $.__views.login = Ti.UI.createButton({
-        right: "60%",
-        left: "5%",
-        top: "40%",
-        bottom: "50%",
-        id: "login",
+    $.__views.login.add($.__views.passwordLogin);
+    $.__views.submitLogin = Ti.UI.createButton({
+        right: "30%",
+        left: "30%",
+        top: "25%",
+        bottom: "65%",
+        id: "submitLogin",
         title: "Sign in"
     });
-    $.__views.login.add($.__views.login);
-    $.__views.register = Ti.UI.createButton({
-        right: "5%",
-        left: "55%",
-        top: "40%",
-        bottom: "50%",
-        id: "register",
-        title: "Don't have an account?"
-    });
-    $.__views.login.add($.__views.register);
+    $.__views.login.add($.__views.submitLogin);
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.login.open();

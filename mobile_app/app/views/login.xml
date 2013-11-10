@@ -1,9 +1,8 @@
 <Alloy>
 	<Window title="Login">
-		<TextField id="textField1" borderStyle="Ti.UI.INPUT_BORDERSTYLE_ROUNDED" hintText="E-mail" color="#336699" right="5%" left="5%" top="10%" bottom="80%" />
-		<TextField id="textField2" borderStyle="Ti.UI.INPUT_BORDERSTYLE_ROUNDED" passwordMask="true" hintText="Password" color="#336699" right="5%" left="5%"  top="25%" bottom="65%"/>
-		<Button id="login" title="Sign in" right="60%" left="5%" top="40%" bottom="50%"/>
-		<Button id="register" title="Don't have an account?" right="5%" left="55%" top="40%" bottom="50%"/>
+		<TextField id="emailLogin" borderStyle="Ti.UI.INPUT_BORDERSTYLE_ROUNDED" hintText="E-mail" color="#336699" right="5%" left="5%" top="5%" bottom="85%" />
+		<TextField id="passwordLogin" borderStyle="Ti.UI.INPUT_BORDERSTYLE_ROUNDED" passwordMask="true" hintText="Password" color="#336699" right="5%" left="5%"  top="15%" bottom="75%"/>
+		<Button id="submitLogin" title="Sign In" right="30%" left="30%" top="25%" bottom="65%"/>
 	</Window>
 </Alloy>
 
