@@ -1,0 +1,19 @@
+"TextField": { 
+	color: 	"#336699", 
+	right: 	"5%",
+	left: 	"5%", 
+	top: 	"10%",
+	bottom: "80%" 
+},
+"Label":	{
+	top: 	"30dp", 
+	width:	"300dp",
+	height:	"200dp"
+	
+},
+"Button": {
+	right:	"60%", 
+	left:	"5%",
+	top:	"40%", 
+	bottom:	"50%"
+}
