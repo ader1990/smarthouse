@@ -41,7 +41,7 @@ function Controller() {
         top: "25%",
         bottom: "65%",
         id: "submitLogin",
-        title: "Sign in"
+        title: "Sign In"
     });
     $.__views.login.add($.__views.submitLogin);
     exports.destroy = function() {};

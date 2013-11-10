@@ -74,12 +74,14 @@ function Controller() {
         top: "55%",
         bottom: "35%",
         id: "submitLogin",
-        title: "Register"
+        title: "Sign Up"
     });
     $.__views.register.add($.__views.submitLogin);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    $.register.open();
+    exports.register = function() {
+        alert("ddd");
+    };
     _.extend($, exports);
 }
 
