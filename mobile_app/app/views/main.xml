@@ -2,6 +2,8 @@
 	<TabGroup>
 		<Tab title="Home" icon="KS_nav_views.png">
 			<Window title="Home"></Window>
+			<Label title="Home"> Check out your home </Label>
+			
 		</Tab>
 		<Tab title="Settings" icon="KS_nav_views.png">
 			<Window title="Settings"></Window>

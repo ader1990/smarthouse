@@ -77,21 +77,23 @@ function Controller() {
     });
     $.__views.afterland.add($.__views.__alloyId3);
     $.__views.login = Ti.UI.createButton({
-        right: "60%",
-        left: "5%",
+        right: "30%",
+        left: "30%",
         top: "70%",
         bottom: "20%",
         id: "login",
-        title: "Sign in"
+        title: "Sign in",
+        width: "50%"
     });
     $.__views.afterland.add($.__views.login);
     $.__views.register = Ti.UI.createButton({
-        right: "60%",
-        left: "5%",
-        top: "80%",
+        right: "30%",
+        left: "30%",
+        top: "75%",
         bottom: "10%",
         id: "register",
-        title: "Don't have an account?"
+        title: "Don't have an account?",
+        width: "50%"
     });
     $.__views.afterland.add($.__views.register);
     exports.destroy = function() {};
