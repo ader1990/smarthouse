@@ -59,6 +59,11 @@ function Controller() {
     var db = Ti.App.Properties;
     var userLoggedInKey = "userLoggedIn";
     var userToken = "userToken";
+    var homeIdToken = "homeIdToken";
+    var homeNameToken = "homeNameToken";
+    var latitudeToken = "latitudeToken";
+    var longitudeToken = "longitudeToken";
+    var roomsToken = "roomsToken";
     db.setBool(userLoggedInKey, true);
     db.setString(userToken, "id1");
     var baseUrl = "ec2-54-220-99-234.eu-west-1.compute.amazonaws.com:3000";
@@ -91,6 +96,9 @@ function Controller() {
         var homeWindow = Titanium.UI.createWindow({
             backgroundColor: "#fff"
         });
+        var statusWindow = Titanium.UI.createWindow({
+            backgroundColor: "#fff"
+        });
         var tabGroup = Titanium.UI.createTabGroup({
             window: homeWindow
         });
@@ -105,6 +113,7 @@ function Controller() {
             bottom: "85%",
             left: "5%",
             right: "5%",
+            value: db.getString(homeNameToken),
             borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
             hintText: "Home Name"
         });
@@ -115,6 +124,7 @@ function Controller() {
             bottom: "75%",
             left: "5%",
             right: "5%",
+            value: db.getString(homeIdToken),
             borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
             hintText: "Product Key"
         });
@@ -125,6 +135,7 @@ function Controller() {
             bottom: "65%",
             left: "5%",
             right: "55%",
+            value: db.getString(latitudeToken),
             borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
             hintText: "Latitude"
         });
@@ -135,6 +146,7 @@ function Controller() {
             bottom: "65%",
             left: "45%",
             right: "5%",
+            value: db.getString(longitudeToken),
             borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
             hintText: "Longitude"
         });
@@ -145,6 +157,7 @@ function Controller() {
             bottom: "55%",
             left: "5%",
             right: "55%",
+            value: db.getString(roomsToken),
             borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
             hintText: "Rooms"
         });
@@ -155,6 +168,7 @@ function Controller() {
             bottom: "55%",
             left: "45%",
             right: "5%",
+            value: "Yes",
             borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
             hintText: "Has Livingroom"
         });
@@ -179,16 +193,21 @@ function Controller() {
                 home_lat: latitude,
                 home_long: longitude,
                 nr_rooms: roomsVal,
-                lr_bool: true,
+                lr_bool: 0,
                 home_type: 1
             }, "/user/set_home", function() {
-                db.setString(userToken, userPassword);
+                db.setString(homeIdToken, homeIdVal);
+                db.setString(latitudeToken, latitude);
+                db.setString(longitudeToken, longitude);
+                db.setString(roomsToken, roomsVal);
                 alert("Info saved!");
+            }, function() {
+                alert("Data could not be saved");
             });
         });
         tabGroup.addTab(homeTab);
         var statusTab = Titanium.UI.createTab({
-            window: homeWindow,
+            window: statusWindow,
             title: "Status",
             icon: "KS_nav_views.png"
         });

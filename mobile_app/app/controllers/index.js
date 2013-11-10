@@ -3,8 +3,16 @@ var Alloy = require('alloy');
 var db = Ti.App.Properties;
 var userLoggedInKey = "userLoggedIn";
 var userToken = "userToken";
+
+var homeIdToken = "homeIdToken";
+var homeNameToken = "homeNameToken";
+var latitudeToken = "latitudeToken";
+var longitudeToken = "longitudeToken";
+var roomsToken = "roomsToken";
+
 db.setBool(userLoggedInKey, true);
 db.setString(userToken, "id1");
+
 var baseUrl = "ec2-54-220-99-234.eu-west-1.compute.amazonaws.com:3000";
 
 var webClient = function(onSuccess, onError) {
@@ -55,6 +63,10 @@ if (!userLoggedIn) {
 	var homeWindow = Titanium.UI.createWindow({
 		backgroundColor : '#fff'
 	});
+	
+	var statusWindow = Titanium.UI.createWindow({
+		backgroundColor : '#fff'
+	});
 
 	var tabGroup = Titanium.UI.createTabGroup({
 		window : homeWindow
@@ -72,6 +84,7 @@ if (!userLoggedIn) {
 		bottom : '85%',
 		left : '5%',
 		right : '5%',
+		value: db.getString(homeNameToken),
 		borderStyle : Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
 		hintText : 'Home Name'
 	});
@@ -83,6 +96,7 @@ if (!userLoggedIn) {
 		bottom : '75%',
 		left : '5%',
 		right : '5%',
+		value: db.getString(homeIdToken),
 		borderStyle : Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
 		hintText : 'Product Key'
 	});
@@ -94,6 +108,7 @@ if (!userLoggedIn) {
 		bottom : '65%',
 		left : '5%',
 		right : '55%',
+		value: db.getString(latitudeToken),
 		borderStyle : Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
 		hintText : 'Latitude'
 	});
@@ -105,6 +120,7 @@ if (!userLoggedIn) {
 		bottom : '65%',
 		left : '45%',
 		right : '5%',
+		value: db.getString(longitudeToken),
 		borderStyle : Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
 		hintText : 'Longitude'
 	});
@@ -116,6 +132,7 @@ if (!userLoggedIn) {
 		bottom : '55%',
 		left : '5%',
 		right : '55%',
+		value: db.getString(roomsToken),
 		borderStyle : Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
 		hintText : 'Rooms'
 	});
@@ -127,6 +144,7 @@ if (!userLoggedIn) {
 		bottom : '55%',
 		left : '45%',
 		right : '5%',
+		value: "Yes",
 		borderStyle : Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
 		hintText : 'Has Livingroom'
 	});
@@ -152,10 +170,16 @@ if (!userLoggedIn) {
 			home_lat : latitude,
 			home_long : longitude,
 			nr_rooms : roomsVal,
-			lr_bool : true,
+			lr_bool : 0,
 			home_type : 1
 		}, "/user/set_home", function(data) {
+			db.setString(homeIdToken,homeIdVal);
+			db.setString(latitudeToken,latitude);
+			db.setString(longitudeToken,longitude);
+			db.setString(roomsToken,roomsVal);
 			alert("Info saved!");
+		}, function() {
+			alert("Data could not be saved");
 		});
 
 	});
@@ -163,7 +187,7 @@ if (!userLoggedIn) {
 	tabGroup.addTab(homeTab);
 
 	var statusTab = Titanium.UI.createTab({
-		window : homeWindow,
+		window : statusWindow,
 		title : 'Status',
 		icon : 'KS_nav_views.png'
 	});
